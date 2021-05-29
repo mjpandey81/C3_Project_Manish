@@ -87,4 +87,47 @@ class RestaurantTest {
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+    //>>>>>>>>>>>>>>>>>>>>>>>SELECTED MENU Part-3 Tests>>>>>>>>>>>>>>>>>>>>
+    @Test
+    public void given_selected_item_name_item_object_must_be_returned(){
+
+        ArrayList<String> itemNamesList = new ArrayList<String>();
+        itemNamesList.add("Sweet corn soup");
+        assertEquals(restaurant.getMenu().get(0), restaurant.getSelectedMenuItems(itemNamesList).get(0));
+    }
+
+    @Test
+    public void given_selected_item_name_list_is_empty_returned_item_list_size_must_be_zero(){
+
+        ArrayList<String> itemNamesList = new ArrayList<String>();
+        assertEquals(0, restaurant.getSelectedMenuItems(itemNamesList).size());
+    }
+
+    @Test
+    public void total_order_value_for_single_selected_item_must_be_same_as_item_price(){
+
+        ArrayList<String> itemNamesList = new ArrayList<String>();
+        itemNamesList.add("Sweet corn soup");
+        assertEquals(restaurant.getMenu().get(0).getPrice(), restaurant.calculateSelectedMenuCost(restaurant.getSelectedMenuItems(itemNamesList)));
+    }
+
+    @Test
+    public void total_order_value_for_multiple_selected_item_must_be_sum_of_item_price(){
+
+        ArrayList<String> itemNamesList = new ArrayList<String>();
+        itemNamesList.add("Sweet corn soup");
+        itemNamesList.add("Vegetable lasagne");
+        assertEquals(restaurant.getMenu().get(0).getPrice()+restaurant.getMenu().get(1).getPrice(),
+                restaurant.calculateSelectedMenuCost(restaurant.getSelectedMenuItems(itemNamesList)));
+    }
+
+    @Test
+    public void total_order_value_for_no_item_selected_must_be_zero(){
+
+        ArrayList<String> itemNamesList = new ArrayList<String>();
+        assertEquals(0, restaurant.calculateSelectedMenuCost(restaurant.getSelectedMenuItems(itemNamesList)));
+    }
+
+    //<<<<<<<<<<<<<<<<<<<<<<<<<SELECTED MENU<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
 }
