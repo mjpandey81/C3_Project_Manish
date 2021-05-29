@@ -61,5 +61,33 @@ public class Restaurant {
         return name;
     }
 
+    //Part-3: SelectedMenu Methods for returning Item object when names are given and
+    //calculating total price for given Item List
+
+    public List<Item> getSelectedMenuItems(ArrayList<String> selectedItemNameList) {
+        List<Item> selectedMenuItems = new ArrayList<Item>();
+
+        if(selectedItemNameList != null) {
+            for (String itemName : selectedItemNameList) {
+                selectedMenuItems.add(findItemByName(itemName));
+            }
+        }
+
+        return selectedMenuItems;
+    }
+
+    public int calculateSelectedMenuCost(List<Item> selectedMenuItems){
+        int sum = 0;
+        if(selectedMenuItems != null) {
+            for (Item item : selectedMenuItems) {
+                sum += item.getPrice();
+            }
+        }
+
+        return sum;
+
+    }
+
+
 
 }
